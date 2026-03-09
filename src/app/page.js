@@ -1,10 +1,23 @@
 "use client";
+import { useEffect } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useSelector } from "react-redux";
 import { motion } from "framer-motion";
 import { NeonButton, GlassCard } from "@/components/ui/NeonComponents";
 import { Sparkles, Users, BookOpen, Rocket } from "lucide-react";
+import { selectIsAuthenticated, selectCurrentRole } from "@/store/authSlice";
 
 export default function Home() {
+  const router = useRouter();
+  const isAuthenticated = useSelector(selectIsAuthenticated);
+  const role = useSelector(selectCurrentRole);
+
+  useEffect(() => {
+    if (isAuthenticated && role) {
+      router.replace(`/dashboard/${role}`);
+    }
+  }, [isAuthenticated, role, router]);
   return (
     <div className="relative min-h-screen overflow-hidden">
       {/* Background Glows */}
