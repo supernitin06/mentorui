@@ -15,7 +15,7 @@ export default function SummarizeFeature() {
         setIsLoading(true);
         setError(null);
         try {
-            const res = await fetch("http://localhost:5000/llm/summarize", {
+            const res = await fetch("https://mentor-mcg2.onrender.com/llm/summarize", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ text: inputText }),
